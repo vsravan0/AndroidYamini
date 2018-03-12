@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yamini.training.ActivityLogin">
+
+
+    <TextView
+        style="@style/style_tv_head"
+        android:text="Fill Your details"
+        />
+    <EditText
+        android:id="@+id/id_et_unm_signup"
+        style="@style/style_et"
+        android:hint="User Name "
+        />
+    <EditText
+        android:id="@+id/id_et_pwd_signup"
+        style="@style/style_et"
+        android:hint="pass word "
+        android:inputType="textPassword"
+        />
+    <Button
+
+        style="@style/style_button"
+        android:text="Signup"
+        android:id="@+id/id_btn_signup"
+
+        />
+
+
+
+</LinearLayout>

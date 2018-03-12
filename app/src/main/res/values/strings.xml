@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AndroidYamini</string>
+
+    <dimen name="tv_hd_padding">5dp</dimen>
+    <dimen name="tv_hd_size">20sp</dimen>
+    <string name="txt_login">Login</string>
+
+</resources>
