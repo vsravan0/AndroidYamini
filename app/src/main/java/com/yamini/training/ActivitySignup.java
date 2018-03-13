@@ -1,5 +1,6 @@
 package com.yamini.training;
 
+import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.yamini.training.utils.DbUtils;
+import com.yamini.training.utils.MyDatabase;
+
 public class ActivitySignup extends AppCompatActivity implements View.OnClickListener{
     private EditText mEtUserName,mEtPaswword;
     private Button mBtnSignUp;
-
+private static final String TAG="ActivitySignup";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +59,33 @@ public class ActivitySignup extends AppCompatActivity implements View.OnClickLis
 
     private void saveData(String userName, String password){
 
+
+        MyDatabase db = new MyDatabase(getApplicationContext());
+
+        ContentValues cv = new ContentValues();
+        cv.put(DbUtils.TAB_USER_UNM,userName);
+        cv.put(DbUtils.TAB_USER_PWD,password);
+        long isInserved = db.saveData(DbUtils.TAB_USER,DbUtils.TAB_USER_UNM,cv);
+
+        db.close();
+
+        if(isInserved!=-1){
+            Log.v(TAG," isInserved :"+isInserved);
+            Toast.makeText(getApplicationContext()," success ",Toast.LENGTH_LONG).show();
+            finish();
+
+        }else{
+            Toast.makeText(getApplicationContext()," Some error",Toast.LENGTH_LONG).show();
+        }
+
+
 // Key and values saved
+        /*
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor edit = pref.edit();
         edit.putString("username",userName);
         edit.putString("password",password);
-        edit.apply();
+        edit.apply(); */
 
 
 

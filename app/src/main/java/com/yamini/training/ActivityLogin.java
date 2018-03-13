@@ -32,6 +32,12 @@ private static final String TAG="ActivityLogin";
         mBtnReset.setOnClickListener(this);
         mBtnLogin.setOnClickListener(this);
     }
+    // Bulk of data , Maniplations ,
+    // No
+    // 1000 studnt -> 10columns
+    // User , pwd
+    // Data base : SQLlite -> Sql Lite
+
 
     @Override
     protected void onRestart() {
