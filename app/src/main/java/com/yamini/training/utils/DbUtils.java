@@ -14,7 +14,7 @@ public class DbUtils {
      public static final String TAB_USER_PWD ="pwd";
 
      public static final String CREATE_TABLE= "create table if not exists "+TAB_USER+"  (  "+TAB_USER_UNM
-             +"  text , "+TAB_USER_PWD +" text );";
+             +"  text  , "+TAB_USER_PWD +" text );";
 
 
 

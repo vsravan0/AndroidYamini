@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    s<string name="app_name">Entraînement</string>
+    <string name="txt_login">S\'identifier</string>
+</resources>
