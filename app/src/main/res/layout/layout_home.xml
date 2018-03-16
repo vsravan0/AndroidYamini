@@ -20,12 +20,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/id_tv_data"
         />
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/id_pb_loading"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        />
+</RelativeLayout>
     </ScrollView>
 
 </LinearLayout>

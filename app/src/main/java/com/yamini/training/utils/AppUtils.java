@@ -2,6 +2,10 @@ package com.yamini.training.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,6 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -58,7 +64,7 @@ public class AppUtils {
 
 
 
-
+// ANR : Activity Not respond
 
 
     public static final String URL_PATH="http://api.themoviedb.org/3/movie/popular?api_key=dad78d0a6eee736a777d00c394e6f00e";
@@ -89,6 +95,7 @@ public class AppUtils {
             InputStream isr = loadData();
             if(isr== null){
                 Log.v(TAG," Error while loading data ");
+                return "";
             }
             BufferedReader buf = new BufferedReader(new InputStreamReader(isr));
             // Converst Stream to String
@@ -108,5 +115,68 @@ public class AppUtils {
     }
 
 
+    public static boolean isNetWorkAvaliable(Context ctx ){
+
+        ConnectivityManager cm = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return  (networkInfo!=null&& networkInfo.isConnected());
+
+
+
+
+    }
+
+    public static void enableData(Context ctx){
+
+
+        boolean isWifiSupport =ctx.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI);
+
+        if(isWifiSupport) {
+            WifiManager wifiManager = (WifiManager) ctx.getSystemService(Context.WIFI_SERVICE);
+            if (wifiManager != null) {
+                wifiManager.setWifiEnabled(true);
+                Log.v(TAG, " Called enable wifi isWifiSupport:" + isWifiSupport);
+            } else {
+                Log.v(TAG, " DUT Does not support Wifi");
+            }
+
+        }else{
+            enableMobileData(ctx);
+        }
+
+    }
+
+    public static  void enableMobileData(Context ctx){
+
+        ConnectivityManager cm = (ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        Method dataMtd = null;
+        try {
+            dataMtd = ConnectivityManager.class.getDeclaredMethod("setMobileDataEnabled", boolean.class);
+            dataMtd.setAccessible(true);
+            try {
+                dataMtd.invoke(cm, true);
+
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                Log.v(TAG,e.toString());
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+                Log.v(TAG,e.toString());
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+            Log.v(TAG,e.toString());
+        }
+
+
+
+    }
+
+
+
+    public static void toast(Context ctx , String msg){
+Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
+    }
 
 }
