@@ -41,6 +41,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(DbUtils.CREATE_TABLE);
+        sqLiteDatabase.execSQL(DbUtils.CREATE_TABLE_MOVIE);
 
         Log.i(TAG," onCreate  ");
 

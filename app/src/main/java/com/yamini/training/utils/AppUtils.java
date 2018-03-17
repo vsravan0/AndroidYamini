@@ -1,5 +1,6 @@
 package com.yamini.training.utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -11,6 +12,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -25,6 +30,7 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 
 /**
  * Created by sravan on 10/03/18.
@@ -179,4 +185,65 @@ public class AppUtils {
 Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
     }
 
+
+    public static ArrayList<Movie> parseData(String response){
+        ArrayList<Movie> movieList = new ArrayList<Movie>();
+
+        try {
+            JSONObject obj = new JSONObject(response);
+            int page = obj.getInt(Keys.KEY_PAGE);
+            int toalResult=obj.getInt(Keys.KEY_TOTLA_RESULTS);
+            int totalPages= obj.getInt(Keys.KEY_TOTAL_PAGES);
+            JSONArray arr = obj.getJSONArray(Keys.KEY_RESULTS);
+            for(int i=0;i<arr.length();i++){
+                JSONObject ob = arr.getJSONObject(i);
+                String  releaseData=ob.getString(Keys.KEY_RELESAE_DATE);
+                String overView="";
+                if(ob.has(Keys.KEY_RELESAE_DATE)) {
+                     overView = ob.getString(Keys.KEY_OVERVIEW);
+                }
+                String  backdropPath=ob.getString(Keys.KEY_BACKDROP_PATH);
+                String  originalTitle=ob.getString(Keys.KEY_ORIGINAL_TITLE);
+                Movie movie = new Movie(page,releaseData,overView,backdropPath,originalTitle);
+
+                Log.v(TAG," Movies iNfo "+movie);
+            movieList.add(movie);
+            }
+        }catch (JSONException js){
+            Log.v(TAG," Error parseData "+js);
+        }
+        return movieList;
+    }
+
+
+
+    public static final int saveMovies(Context ctx ,ArrayList<Movie> list ){
+
+        MyDatabase db = new MyDatabase(ctx);
+        ContentValues cv;
+        Movie movie;
+        int count =0;
+
+        for(int i=0;i<list.size();i++){
+            movie = list.get(i);
+             cv = new ContentValues();
+            cv.put(DbUtils.COL_PAGE_ID,movie.getmPage());
+            cv.put(DbUtils.COL_BACKGROUND_PATH,movie.getmBackGroundPath());
+            cv.put(DbUtils.COL_ORIGINL_DATE,movie.getmOriginalDate());
+            cv.put(DbUtils.COL_OVERVIEW,movie.getmOverView());
+            cv.put(DbUtils.COL_RELEASE_DATE,movie.getmReleaseData());
+
+            long rowId=db.saveData(DbUtils.TAB_MOVIE,DbUtils.COL_PAGE_ID,cv);
+            Log.v(TAG,"saveMovies  rowId :"+rowId);
+            if(rowId!=-1){
+                count++;
+            }
+
+
+        }
+        return  count;
+
+
+
+    }
 }

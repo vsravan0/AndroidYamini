@@ -13,6 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yamini.training.utils.AppUtils;
+import com.yamini.training.utils.Movie;
+import com.yamini.training.utils.MyDatabase;
+
+import java.util.ArrayList;
 
 /**
  * Created by sravan on 15/03/18.
@@ -66,7 +70,7 @@ AppUtils.toast(mCtx," Net work not Available");
     }
 
 
-    class MyTask extends AsyncTask <Void,String, String>{
+    class MyTask extends AsyncTask <Void,Integer, Integer>{
 
 
 
@@ -76,22 +80,30 @@ AppUtils.toast(mCtx," Net work not Available");
             mProgress.setVisibility(ProgressBar.VISIBLE);
         }
         @Override
-        protected String doInBackground(Void... values) { // Needs to logn running operations
+        protected Integer doInBackground(Void... values) { // Needs to logn running operations
 
-            String response = AppUtils.getMoviesInfo();
-            Log.v(TAG," Response :"+response);
-           // mTvData.setText(response); We can  not perform UI opearation in background
+            String response = AppUtils.getMoviesInfo(); // Getting response from service and converting into String data
+            ArrayList<Movie> list =AppUtils.parseData(response); // Converting from String to Json
+            int totalRecods=AppUtils.saveMovies(mCtx,list); // Saving those records into Db
 
-            return response;
+            return totalRecods;
+
+
         }
 
 
 
         @Override
-        protected void onPostExecute(String response) {
+        protected void onPostExecute(Integer response) {
             super.onPostExecute(response);
-            mTvData.setText(response);
+
+            mTvData.setText(" Total saved records :"+response);
+            Log.v(TAG," Total saved records :"+response);
             mProgress.setVisibility(ProgressBar.INVISIBLE);
+
+
+
+
 
 
         }
