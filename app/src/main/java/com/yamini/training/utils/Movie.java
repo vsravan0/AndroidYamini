@@ -10,17 +10,6 @@ public class Movie {
     public String  mReleaseData;
 
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "mReleaseData='" + mReleaseData + '\'' +
-                ", mPage='" + mPage + '\'' +
-                ", mOverView='" + mOverView + '\'' +
-                ", mBackGroundPath='" + mBackGroundPath + '\'' +
-                ", mOriginalDate='" + mOriginalDate + '\'' +
-                '}';
-    }
-
     public int getmPage() {
         return mPage;
     }
@@ -31,12 +20,37 @@ public class Movie {
 
     private int mPage ;
 
-    public Movie(int mPage , String mReleaseData, String mOverView, String mBackGroundPath, String mOriginalDate) {
+    public int getmMovieId() {
+        return mMovieId;
+    }
+
+    public void setmMovieId(int mMovieId) {
+        this.mMovieId = mMovieId;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "mReleaseData='" + mReleaseData + '\'' +
+                ", mPage=" + mPage +
+                ", mMovieId=" + mMovieId +
+                ", mOverView='" + mOverView + '\'' +
+                ", mBackGroundPath='" + mBackGroundPath + '\'' +
+                ", mOriginalDate='" + mOriginalDate + '\'' +
+                '}';
+    }
+
+    private int mMovieId;
+
+    public Movie(int mPage , String mReleaseData, String mOverView, String mBackGroundPath, String mOriginalDate,
+    int mMovieId) {
         this.mReleaseData = mReleaseData;
         this.mOverView = mOverView;
         this.mBackGroundPath = mBackGroundPath;
         this.mOriginalDate = mOriginalDate;
         this.mPage = mPage;
+        this.mMovieId= mMovieId;
+
     }
 
     public String getmReleaseData() {

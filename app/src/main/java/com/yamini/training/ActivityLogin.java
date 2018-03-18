@@ -60,7 +60,8 @@ private static final String TAG="ActivityLogin";
             mEtPaswword.setText("");
             mEtUserName.setText("");
         } else if(view== mBtnLogin){
-            AppUtils.checkLogin(getApplication(), mEtUserName, mEtPaswword);
+           // AppUtils.checkLogin(getApplication(), mEtUserName, mEtPaswword);
+            startActivity(new Intent(ActivityLogin.this,ActivityHome.class));
 
         }
 

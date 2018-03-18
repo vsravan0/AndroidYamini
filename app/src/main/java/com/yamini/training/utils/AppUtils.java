@@ -17,14 +17,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -202,9 +198,11 @@ Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
                 if(ob.has(Keys.KEY_RELESAE_DATE)) {
                      overView = ob.getString(Keys.KEY_OVERVIEW);
                 }
+
                 String  backdropPath=ob.getString(Keys.KEY_BACKDROP_PATH);
                 String  originalTitle=ob.getString(Keys.KEY_ORIGINAL_TITLE);
-                Movie movie = new Movie(page,releaseData,overView,backdropPath,originalTitle);
+                int id= ob.getInt(Keys.KEY_MOVIE_ID);
+                Movie movie = new Movie(page,releaseData,overView,backdropPath,originalTitle,id);
 
                 Log.v(TAG," Movies iNfo "+movie);
             movieList.add(movie);
@@ -216,6 +214,25 @@ Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
     }
 
 
+
+    public static ArrayList<Movie> loadMovies(Context ctx){
+
+
+
+        if(AppUtils.isNetWorkAvaliable(ctx)) {
+            String response = AppUtils.getMoviesInfo(); // Getting response from service and converting into String data
+            ArrayList<Movie> list = AppUtils.parseData(response); // Converting from String to Json
+            int totalRecods = AppUtils.saveMovies(ctx, list); // Saving those records into Db
+            Log.v(TAG," loadMovies saved data no of records :"+totalRecods);
+        }
+
+        MyDatabase db = new MyDatabase(ctx);
+        ArrayList<Movie> moviesList= db.getMoviesInfo("select * from "+DbUtils.TAB_MOVIE);
+        return moviesList;
+
+
+
+    }
 
     public static final int saveMovies(Context ctx ,ArrayList<Movie> list ){
 
@@ -229,9 +246,10 @@ Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
              cv = new ContentValues();
             cv.put(DbUtils.COL_PAGE_ID,movie.getmPage());
             cv.put(DbUtils.COL_BACKGROUND_PATH,movie.getmBackGroundPath());
-            cv.put(DbUtils.COL_ORIGINL_DATE,movie.getmOriginalDate());
+            cv.put(DbUtils.COL_ORIGINL_TITLE,movie.getmOriginalDate());
             cv.put(DbUtils.COL_OVERVIEW,movie.getmOverView());
             cv.put(DbUtils.COL_RELEASE_DATE,movie.getmReleaseData());
+            cv.put(DbUtils.COL_MOVIE_ID,movie.getmMovieId());
 
             long rowId=db.saveData(DbUtils.TAB_MOVIE,DbUtils.COL_PAGE_ID,cv);
             Log.v(TAG,"saveMovies  rowId :"+rowId);

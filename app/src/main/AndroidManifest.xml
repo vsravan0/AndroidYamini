@@ -15,7 +15,7 @@
 
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityHome">
+        <activity android:name=".ActivityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ActivitySignup"></activity>
+        <activity android:name=".ActivityHome"></activity>
     </application>
 
 </manifest>

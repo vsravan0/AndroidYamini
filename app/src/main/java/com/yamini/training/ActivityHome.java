@@ -8,15 +8,20 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yamini.training.adapter.MoviedAdapter;
 import com.yamini.training.utils.AppUtils;
+import com.yamini.training.utils.DbUtils;
 import com.yamini.training.utils.Movie;
 import com.yamini.training.utils.MyDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sravan on 15/03/18.
@@ -33,12 +38,15 @@ public class ActivityHome extends Activity {
     private ProgressBar mProgress;
     private static final String TAG="ActivityHome";
     private Context mCtx;
+    private ListView mLv;
+    private ArrayList<Movie> mMoviesLsit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_home);
         mCtx= getApplicationContext();
+        mLv=(ListView)findViewById(R.id.id_lv_movies);
 
        /* if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -52,25 +60,12 @@ public class ActivityHome extends Activity {
 
 
     public  void loadMovies(View v){
-
-
-        if(AppUtils.isNetWorkAvaliable(mCtx)) {
-            MyTask task = new MyTask();
-            task.execute();
-
-        } else{
-AppUtils.toast(mCtx," Net work not Available");
-            AppUtils.enableData(mCtx);
-        }
-
-        /*String response = AppUtils.getMoviesInfo(); // 3 sec
-        Toast.makeText(getApplicationContext()," Response :"+response,Toast.LENGTH_LONG).show();
-        mTvData.setText(response); */
-
+        MyTask task = new MyTask();
+        task.execute();
     }
 
 
-    class MyTask extends AsyncTask <Void,Integer, Integer>{
+    class MyTask extends AsyncTask <Void,ArrayList<Movie>, ArrayList<Movie>>{
 
 
 
@@ -80,33 +75,29 @@ AppUtils.toast(mCtx," Net work not Available");
             mProgress.setVisibility(ProgressBar.VISIBLE);
         }
         @Override
-        protected Integer doInBackground(Void... values) { // Needs to logn running operations
-
-            String response = AppUtils.getMoviesInfo(); // Getting response from service and converting into String data
-            ArrayList<Movie> list =AppUtils.parseData(response); // Converting from String to Json
-            int totalRecods=AppUtils.saveMovies(mCtx,list); // Saving those records into Db
-
-            return totalRecods;
+        protected ArrayList<Movie> doInBackground(Void... values) { // Needs to logn running operations
 
 
+            return AppUtils.loadMovies(mCtx);
         }
 
 
 
         @Override
-        protected void onPostExecute(Integer response) {
-            super.onPostExecute(response);
-
-            mTvData.setText(" Total saved records :"+response);
-            Log.v(TAG," Total saved records :"+response);
+        protected void onPostExecute(ArrayList<Movie> responseList) {
+            super.onPostExecute(responseList);
+            mTvData.setText(" Total saved records :"+responseList.size());
+            Log.v(TAG," Total saved records :"+responseList.size());
             mProgress.setVisibility(ProgressBar.INVISIBLE);
-
-
-
-
-
-
+            mMoviesLsit= responseList;
+            setDapter();
         }
     }
 
+
+    private void setDapter(){
+        MoviedAdapter adapter = new MoviedAdapter(mMoviesLsit,getLayoutInflater());
+        mLv.setAdapter(adapter);
+
+    }
 }
