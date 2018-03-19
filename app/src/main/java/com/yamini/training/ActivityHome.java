@@ -2,12 +2,14 @@ package com.yamini.training;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import com.yamini.training.adapter.MoviedAdapter;
 import com.yamini.training.utils.AppUtils;
 import com.yamini.training.utils.DbUtils;
+import com.yamini.training.utils.Keys;
 import com.yamini.training.utils.Movie;
 import com.yamini.training.utils.MyDatabase;
 
@@ -32,7 +35,7 @@ import java.util.List;
 Call Webservice
 
  */
-public class ActivityHome extends Activity {
+public class ActivityHome extends Activity implements AdapterView.OnItemClickListener{
 
     TextView mTvData;
     private ProgressBar mProgress;
@@ -47,6 +50,7 @@ public class ActivityHome extends Activity {
         setContentView(R.layout.layout_home);
         mCtx= getApplicationContext();
         mLv=(ListView)findViewById(R.id.id_lv_movies);
+        mLv.setOnItemClickListener(this);
 
        /* if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -55,6 +59,8 @@ public class ActivityHome extends Activity {
         mTvData =(TextView)findViewById(R.id.id_tv_data);
         mProgress=(ProgressBar)findViewById(R.id.id_pb_loading);
         mProgress.setVisibility(ProgressBar.INVISIBLE);
+        MyTask task = new MyTask();
+        task.execute();
 
     }
 
@@ -62,6 +68,21 @@ public class ActivityHome extends Activity {
     public  void loadMovies(View v){
         MyTask task = new MyTask();
         task.execute();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+Log.v(TAG," Clicked Itme Position :"+position);
+Intent intent=new Intent(ActivityHome.this,ActivityMoveInfo.class);
+Movie movie= mMoviesLsit.get(position);
+intent.putExtra(Keys.KEY_MOVIE_ID,movie.getmMovieId());
+
+        intent.putExtra(Keys.KEY_MOVIE,movie);
+
+startActivity(intent);
+
+
     }
 
 

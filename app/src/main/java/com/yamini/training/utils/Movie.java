@@ -1,10 +1,12 @@
 package com.yamini.training.utils;
 
+import java.io.Serializable;
+
 /**
  * Created by sravan on 17/03/18.
  */
 
-public class Movie {
+public class Movie  implements Serializable{
 
 
     public String  mReleaseData;

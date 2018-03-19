@@ -5,6 +5,7 @@
     android:orientation="vertical"
     >
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,6 +13,7 @@
         android:id="@+id/id_tv_movieid"
         android:textStyle="bold|italic"
         android:textColor="@android:color/black"
+        style="@android:style/TextAppearance.DeviceDefault.Large"
 
         />
     <TextView
@@ -19,6 +21,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/id_tv_overview"
         android:textColor="@android:color/black"
+        style="@android:style/TextAppearance.DeviceDefault.Large"
+
         />
 
 </LinearLayout>

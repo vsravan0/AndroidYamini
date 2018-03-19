@@ -37,6 +37,13 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     }
 
+    public boolean isMoviesExistied(){
+        Cursor cur=mDatabase.rawQuery("select * from "+DbUtils.TAB_MOVIE,null);
+        int count =cur.getCount();
+        cur.close();
+        return (count>0) ?true:false;
+    }
+
     public long saveData(String tabName , String colNme , ContentValues contentValues){
 
         try {

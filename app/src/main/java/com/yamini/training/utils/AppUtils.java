@@ -217,16 +217,15 @@ Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
 
     public static ArrayList<Movie> loadMovies(Context ctx){
 
+        MyDatabase db = new MyDatabase(ctx);
 
-
-        if(AppUtils.isNetWorkAvaliable(ctx)) {
+        if(AppUtils.isNetWorkAvaliable(ctx) && !db.isMoviesExistied()) {
             String response = AppUtils.getMoviesInfo(); // Getting response from service and converting into String data
             ArrayList<Movie> list = AppUtils.parseData(response); // Converting from String to Json
             int totalRecods = AppUtils.saveMovies(ctx, list); // Saving those records into Db
             Log.v(TAG," loadMovies saved data no of records :"+totalRecods);
         }
 
-        MyDatabase db = new MyDatabase(ctx);
         ArrayList<Movie> moviesList= db.getMoviesInfo("select * from "+DbUtils.TAB_MOVIE);
         return moviesList;
 

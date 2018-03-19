@@ -24,7 +24,8 @@ public class Keys {
     static final String KEY_OVERVIEW="overview";
     static final String KEY_BACKDROP_PATH="backdrop_path";
     static final String KEY_ORIGINAL_TITLE="original_title";
-    static final String KEY_MOVIE_ID="id";
+    public static final String KEY_MOVIE_ID="id";
+    public static final String KEY_MOVIE="movie";
 
 
 }
