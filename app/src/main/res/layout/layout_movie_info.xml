@@ -12,4 +12,6 @@
         style="@android:style/TextAppearance.DeviceDefault.Large"
         android:id="@+id/id_tv_movie_info"/>
 
+
+
 </android.support.constraint.ConstraintLayout>

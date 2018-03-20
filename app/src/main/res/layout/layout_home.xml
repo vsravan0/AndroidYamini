@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/id_lv_movies"
         android:dividerHeight="2dp"
+
         ></ListView>
 
 </LinearLayout>

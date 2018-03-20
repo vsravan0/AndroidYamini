@@ -4,6 +4,7 @@
     <dimen name="tv_hd_size">20sp</dimen>
     <string name="txt_login">Login</string>
     <string name="app_name">Training</string>
+    <string name="title_activity_recycle_view">ActivityRecycleView</string>
 
 
 </resources>

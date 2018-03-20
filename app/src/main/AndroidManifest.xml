@@ -15,15 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ActivityHome">
+
+        </activity>
+        <activity android:name=".ActivitySignup" />
+        <activity android:name=".ActivityLogin" />
+        <activity android:name=".ActivityMoveInfo" />
+        <activity
+            android:name=".ActivityRecycleView"
+            android:label="@string/title_activity_recycle_view"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivitySignup" />
-        <activity android:name=".ActivityLogin" />
-        <activity android:name=".ActivityMoveInfo"></activity>
     </application>
 
 </manifest>

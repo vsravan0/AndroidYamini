@@ -65,6 +65,13 @@ public class ActivityHome extends Activity implements AdapterView.OnItemClickLis
     }
 
 
+    /*
+    RecyclerView -> Listview ( Optmized way)-> cache
+    &
+    CardView : Meterial Design in Android -> UI related -> shadows , corners
+
+
+     */
     public  void loadMovies(View v){
         MyTask task = new MyTask();
         task.execute();
@@ -76,9 +83,9 @@ public class ActivityHome extends Activity implements AdapterView.OnItemClickLis
 Log.v(TAG," Clicked Itme Position :"+position);
 Intent intent=new Intent(ActivityHome.this,ActivityMoveInfo.class);
 Movie movie= mMoviesLsit.get(position);
-intent.putExtra(Keys.KEY_MOVIE_ID,movie.getmMovieId());
+intent.putExtra(Keys.KEY_MOVIE_ID,movie.getmMovieId());  // One value , Primitive Value ( int , double , String )
 
-        intent.putExtra(Keys.KEY_MOVIE,movie);
+        intent.putExtra(Keys.KEY_MOVIE,movie); // One Object , combination of multiplevalues
 
 startActivity(intent);
 
