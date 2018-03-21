@@ -214,6 +214,56 @@ Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
     }
 
 
+     public static ArrayList<Movie> movies;
+
+    public static void loadDataInBg(final Context ctx){
+
+
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                movies = loadMovies(ctx);
+                Log.v(TAG,"loadDataInBg : "+movies.size());
+            }
+        };
+
+        Thread th = new Thread(r);
+        th.start(); // Run
+    }
+    public void stopThread(){
+        if(thread!=null)
+        thread.interrupt();
+    }
+
+    Thread thread;
+
+    public  void startThread(){
+
+
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+
+         while(true && !thread.isInterrupted()){
+
+             // Some task
+             try {
+                 Thread.sleep(1000);
+             } catch (InterruptedException e) {
+                 e.printStackTrace();
+             }
+         }
+
+            }
+        };
+
+         thread = new Thread(r);
+        thread.start(); // Run
+
+
+
+    }
+
 
     public static ArrayList<Movie> loadMovies(Context ctx){
 
