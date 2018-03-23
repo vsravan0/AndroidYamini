@@ -81,6 +81,7 @@ public class MyDatabase extends SQLiteOpenHelper {
      list.add(movie);
  }
        }
+       cur.close();
        return list;
     }
 

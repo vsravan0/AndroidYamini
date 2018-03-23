@@ -1,0 +1,27 @@
+
+Android Components :
+
+Activity : UI
+Services :
+
+Inbuilt Services : Connectiivt Service
+
+Bluetooth ,Camera , Wifi
+User Definded : Created By US
+
+class MyService extends Service {
+
+
+}
+
+Broadcast Receiver :
+Call
+MSG
+
+User Defined , Pre defined
+
+Content Provider :
+Contacts , Images , Videos , Files
+
+
+

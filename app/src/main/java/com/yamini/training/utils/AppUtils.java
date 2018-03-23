@@ -248,7 +248,7 @@ Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
 
              // Some task
              try {
-                 Thread.sleep(1000);
+                 Thread.sleep(1000); // Join , Notify , wait , notifyAll , isAlive
              } catch (InterruptedException e) {
                  e.printStackTrace();
              }
@@ -259,6 +259,26 @@ Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
 
          thread = new Thread(r);
         thread.start(); // Run
+
+
+
+
+    }
+
+    public static void fetchMoviesFromServer(Context ctx){
+
+        MyDatabase db = new MyDatabase(ctx);
+
+        if(AppUtils.isNetWorkAvaliable(ctx) && !db.isMoviesExistied()) {
+            String response = AppUtils.getMoviesInfo(); // Getting response from service and converting into String data
+            ArrayList<Movie> list = AppUtils.parseData(response); // Converting from String to Json
+            int totalRecods = AppUtils.saveMovies(ctx, list); // Saving those records into Db
+            Log.v(TAG," loadMovies saved data no of records :"+totalRecods);
+        }else{
+            Log.v(TAG," Data already present ");
+
+        }
+
 
 
 
@@ -282,6 +302,21 @@ Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
 
 
     }
+
+
+    public static ArrayList<Movie> getLocalMovies(Context ctx){
+
+        MyDatabase db = new MyDatabase(ctx);
+
+        ArrayList<Movie> moviesList= db.getMoviesInfo("select * from "+DbUtils.TAB_MOVIE);
+        db.close();
+        return moviesList;
+
+
+
+    }
+
+
 
     public static final int saveMovies(Context ctx ,ArrayList<Movie> list ){
 

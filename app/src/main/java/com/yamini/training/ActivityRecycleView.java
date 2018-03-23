@@ -1,6 +1,7 @@
 package com.yamini.training;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import android.view.View;
 
 import com.yamini.training.R;
 import com.yamini.training.adapter.MoviesRecycleAdapter;
+import com.yamini.training.services.MyService;
 import com.yamini.training.utils.AppUtils;
 import com.yamini.training.utils.Movie;
 
@@ -33,7 +35,7 @@ public class ActivityRecycleView extends AppCompatActivity {
     private final int DATA_LOAD_ERROR= 1001;
 
 
-
+// ANR :Activity Not respond
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class ActivityRecycleView extends AppCompatActivity {
         //mMoviesLsit= AppUtils.loadMovies(getApplicationContext());
         LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getApplicationContext());
         mMoviesRecyclerView.setLayoutManager(linearLayoutManager);
-        loadDataInBg();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +67,7 @@ public class ActivityRecycleView extends AppCompatActivity {
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                mMoviesLsit = AppUtils.loadMovies(getApplicationContext());
+                mMoviesLsit = AppUtils.getLocalMovies(getApplicationContext());
                 Log.v(TAG,"loadDataInBg : "+mMoviesLsit.size());
 
                 if(mMoviesLsit.size()==0) {
@@ -101,6 +103,22 @@ public class ActivityRecycleView extends AppCompatActivity {
 
         }
     }
+
+
+    public  void loadFromServer(View view){
+        Intent intent = new Intent(ActivityRecycleView.this, MyService.class);
+        startService(intent);
+
+    }
+    public  void killService(View view){
+        Intent intent = new Intent(ActivityRecycleView.this, MyService.class);
+        stopService(intent);
+
+    }
+    public  void loadFromLocal(View view){
+        loadDataInBg();
+    }
+
 
 
 

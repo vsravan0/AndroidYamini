@@ -6,7 +6,39 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.yamini.training.ActivityRecycleView"
-    tools:showIn="@layout/layout_recycleview">
+    tools:showIn="@layout/layout_recycleview"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Load From Server"
+            android:onClick="loadFromServer"
+            android:layout_weight="1"
+            />
+        <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Load From Local"
+        android:onClick="loadFromLocal"
+        android:layout_weight="1"
+        />
+
+
+
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kill Servec"
+        android:onClick="killService"
+        />
 
 <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"
