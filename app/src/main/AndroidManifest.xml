@@ -15,11 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ActivityHome" />
+        <activity android:name=".ActivityRecycleView" />
         <activity android:name=".ActivitySignup" />
-        <activity android:name=".ActivityLogin" />
         <activity android:name=".ActivityMoveInfo" />
         <activity
-            android:name=".ActivityRecycleView"
+            android:name=".ActivityLogin"
             android:label="@string/title_activity_recycle_view"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

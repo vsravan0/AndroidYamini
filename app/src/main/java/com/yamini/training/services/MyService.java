@@ -34,6 +34,9 @@ public class MyService extends Service {
                 Log.v(TAG," start fetch");
                 AppUtils.fetchMoviesFromServer(getApplicationContext());
                 Log.v(TAG," end fetch");
+                Intent intent= new Intent();
+                intent.setAction(AppUtils.DATA_LOADED);
+                sendBroadcast(intent);
                // stopSelf();
 
 

@@ -1,7 +1,9 @@
 package com.yamini.training;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
-import com.yamini.training.R;
 import com.yamini.training.adapter.MoviesRecycleAdapter;
 import com.yamini.training.services.MyService;
 import com.yamini.training.utils.AppUtils;
@@ -35,6 +36,27 @@ public class ActivityRecycleView extends AppCompatActivity {
     private final int DATA_LOAD_ERROR= 1001;
 
 
+    class  MyReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Log.i(TAG," Action :"+action);
+            if(action.equals(AppUtils.DATA_LOADED)){
+                loadDataInBg();
+            }
+
+        }
+    }
+
+    private MyReceiver myReceiver;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myReceiver);
+    }
+
 // ANR :Activity Not respond
 
     @Override
@@ -45,6 +67,14 @@ public class ActivityRecycleView extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         handler = new MyHandler();
+        myReceiver = new MyReceiver();
+        IntentFilter filter = new IntentFilter(AppUtils.DATA_LOADED);
+        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        filter.addAction(Intent.ACTION_SCREEN_ON);
+
+
+        registerReceiver(myReceiver,filter);
         //mMoviesLsit= AppUtils.loadMovies(getApplicationContext());
         LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getApplicationContext());
         mMoviesRecyclerView.setLayoutManager(linearLayoutManager);
@@ -58,7 +88,10 @@ public class ActivityRecycleView extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
     }
+
 
 
     public  void loadDataInBg(){
@@ -118,7 +151,6 @@ public class ActivityRecycleView extends AppCompatActivity {
     public  void loadFromLocal(View view){
         loadDataInBg();
     }
-
 
 
 

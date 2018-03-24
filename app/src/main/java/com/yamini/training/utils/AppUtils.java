@@ -36,6 +36,8 @@ public class AppUtils {
 
     private static final String TAG="AppUtils";
 
+    public static final String DATA_LOADED ="com.yamini.training.DATA_LOADED";
+
     public static boolean isEmpty(EditText editText){
         String data = editText.getText().toString().trim();
 
@@ -44,6 +46,9 @@ public class AppUtils {
         return TextUtils.isEmpty(data);
 
     }
+
+
+
 
     public static  void  checkLogin(Context ctx , EditText etUser, EditText etPwd){
         String username = etUser.getText().toString().trim();
