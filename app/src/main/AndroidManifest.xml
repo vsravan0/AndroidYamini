@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -19,20 +21,26 @@
         <activity android:name=".ActivitySignup" />
         <activity android:name=".ActivityMoveInfo" />
         <activity
-            android:name=".ActivityLogin"
+            android:name=".ActivityContacts"
             android:label="@string/title_activity_recycle_view"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <service
             android:name=".services.MyService"
             android:enabled="true"
             android:exported="true" />
+
+        <activity android:name=".ActivityRealTime" />
+        <activity android:name=".ActivityLogin" />
+        <activity android:name=".ActivityExpandable">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

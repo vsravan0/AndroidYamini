@@ -89,7 +89,6 @@ public class ActivityRecycleView extends AppCompatActivity {
             }
         });
 
-
     }
 
 

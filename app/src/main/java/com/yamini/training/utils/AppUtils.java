@@ -27,6 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by sravan on 10/03/18.
@@ -353,4 +354,44 @@ Toast.makeText(ctx,msg,Toast.LENGTH_LONG).show();
 
 
     }
+
+
+
+    public static HashMap<String, ArrayList<String>>  getExListviewData(){
+
+
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Header one child 1 ");
+        list.add("Header one child 2 ");
+
+        list.add("Header one child 3 ");
+
+        list.add("Header one child 4");
+
+
+        map.put("HEADER ONE",list);
+
+        list = new ArrayList<>();
+        list.add("Header two child 1 ");
+        list.add("Header two child 2 ");
+
+        map.put("HEADER TWO",list);
+
+
+        list = new ArrayList<>();
+        list.add("Header Three child 1 ");
+        list.add("Header Three child 2 ");
+        list.add("Header Three child 3 ");
+        map.put("HEADER Three",list);
+
+
+return map;
+
+
+
+
+    }
+
+
 }

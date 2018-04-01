@@ -9,6 +9,10 @@ Inbuilt Services : Connectiivt Service
 Bluetooth ,Camera , Wifi
 User Definded : Created By US
 
+Service  : run always , explicitily we needs to stop
+Intent Service  : Stop autmatically ,
+
+
 class MyService extends Service {
 
 
@@ -20,8 +24,31 @@ MSG
 
 User Defined , Pre defined
 
-Content Provider :
-Contacts , Images , Videos , Files
+1) Content Provider : Pre definded , User defined
+
+Contacts, Image, Messages
+URI
+
+2) Animations
+3) Location Server ( get Current location ) , MAP ,
+4) Fragments , Viewpager m ViewFlipper
+5) Notifications
+6) Dialogs
+7) Tabs
+8) Intent , start camera , take pictre from gallry  start Browser
+9) Preparing application for Publishing
+10) Publishing to Android Market and Physical device
+11 ) Kotlin
+
+---
+Intent :
+ExpandableListView
+Dialogs
+Notification
+ViewFlipper
+Animation
+Kotlin
+publishing app and mainitn
 
 
 
