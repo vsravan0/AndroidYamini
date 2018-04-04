@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yamini.training.ActivityTextToSpeech">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:hint="Enter Text to conert to Speech"
+        android:id="@+id/id_et_text"
+        />
+    <Button
+        android:id="@+id/id_btn_speech"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Convert"
+        android:onClick="convertToSpeech"
+        />
+
+    <Button
+        android:id="@+id/id_btn_speech_to_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Speech to Text "
+        android:onClick="convertToSpeech"
+        android:padding="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/id_tv_returned_data"
+        android:textColor="@android:color/black"
+        />
+
+</LinearLayout>

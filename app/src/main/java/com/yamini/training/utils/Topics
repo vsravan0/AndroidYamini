@@ -39,14 +39,15 @@ URI
 9) Preparing application for Publishing
 10) Publishing to Android Market and Physical device
 11 ) Kotlin
+Text to speech  : Text -> speech
 
+Speech to Text
 ---
-Intent :
-ExpandableListView
+
+
+Spinner
 Dialogs
 Notification
-ViewFlipper
-Animation
 Kotlin
 publishing app and mainitn
 

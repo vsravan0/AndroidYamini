@@ -9,9 +9,12 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
-    <uses-feature android:name="android.hardware.camera2" android:required="true"></uses-feature>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -35,17 +38,17 @@
 
         <activity android:name=".ActivityRealTime" />
         <activity android:name=".ActivityLogin" />
-        <activity android:name=".ActivityExpandable"></activity>
-        <activity android:name=".ActivityAnimation">
-
-        </activity>
-        <activity android:name=".ImplicitIntentActivity">
+        <activity android:name=".ActivityExpandable" />
+        <activity android:name=".ActivityAnimation" />
+        <activity android:name=".ImplicitIntentActivity"></activity>
+        <activity android:name=".ActivityTextToSpeech">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ActivitySpeechToText"></activity>
     </application>
 
 </manifest>
